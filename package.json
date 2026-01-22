@@ -12,7 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@atomos/prime": "workspace:*",
+    "@pulsar/ui": "workspace:*",
     "@pulsar/design-tokens": "workspace:*",
     "@pulsar/transformer": "workspace:*",
     "@pulsar/vite-plugin": "workspace:*",

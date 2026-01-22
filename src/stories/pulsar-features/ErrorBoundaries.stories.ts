@@ -1,4 +1,4 @@
-import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@atomos/prime'
+import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@pulsar/ui'
 import type { Meta, StoryObj } from '@storybook/html'
 import { Catcher, Tryer } from 'pulsar/error-boundary'
 
