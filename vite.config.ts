@@ -1,6 +1,6 @@
+import { pulsarPlugin } from '@pulsar/vite-plugin'
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
-import { pulsarPlugin } from '@pulsar/vite-plugin'
 
 export default defineConfig({
   plugins: [
