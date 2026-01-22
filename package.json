@@ -1,7 +1,7 @@
 {
-  "name": "@pulsar/demo",
+  "name": "@pulsar-framework/demo",
   "version": "0.1.0",
-  "description": "Demo applications for pulsar framework",
+  "description": "Example applications for the Pulsar framework",
   "private": true,
   "type": "module",
   "scripts": {
@@ -13,10 +13,10 @@
   },
   "dependencies": {
     "@pulsar/ui": "workspace:*",
-    "@pulsar/design-tokens": "workspace:*",
     "@pulsar/transformer": "workspace:*",
     "@pulsar/vite-plugin": "workspace:*",
-    "pulsar": "workspace:*"
+    "@pulsar-framework/core": "workspace:*",
+    "@pulsar-framework/design-tokens": "workspace:*"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "8.6.14",
@@ -30,5 +30,25 @@
     "tailwindcss": "3.4.1",
     "typescript": "^5.3.3",
     "vite": "^6.4.1"
+  },
+  "keywords": [
+    "pulsar",
+    "demo",
+    "examples",
+    "showcase"
+  ],
+  "author": "Tadeo Piana <https://www.linkedin.com/in/tadeopiana/>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binaryjack/pulsar-demo.git"
+  },
+  "homepage": "https://github.com/binaryjack/pulsar-demo#readme",
+  "bugs": {
+    "url": "https://github.com/binaryjack/pulsar-demo/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   }
 }
