@@ -1,6 +1,6 @@
 import { Button, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
 import type { Meta, StoryObj } from '@storybook/html'
-import { createEffect, createSignal } from 'pulsar'
+import { createEffect, createMemo, createSignal } from 'pulsar'
 import { useEffect, useState } from 'pulsar/hooks'
 
 /**
