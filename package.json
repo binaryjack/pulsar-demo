@@ -1,0 +1,34 @@
+{
+  "name": "@pulsar/demo",
+  "version": "0.1.0",
+  "description": "Demo applications for pulsar framework",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "storybook": "storybook dev -p 6008",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@atomos/prime": "workspace:*",
+    "@pulsar/design-tokens": "workspace:*",
+    "@pulsar/transformer": "workspace:*",
+    "@pulsar/vite-plugin": "workspace:*",
+    "pulsar": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.14",
+    "@storybook/addon-links": "8.6.14",
+    "@storybook/blocks": "8.6.14",
+    "@storybook/html": "8.6.14",
+    "@storybook/html-vite": "8.6.14",
+    "autoprefixer": "10.4.17",
+    "postcss": "8.4.33",
+    "storybook": "8.6.14",
+    "tailwindcss": "3.4.1",
+    "typescript": "^5.3.3",
+    "vite": "^6.4.1"
+  }
+}
