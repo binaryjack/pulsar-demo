@@ -1,7 +1,11 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
+import { pulsarPlugin } from '@pulsar/vite-plugin'
 
 export default defineConfig({
+  plugins: [
+    pulsarPlugin()
+  ],
   resolve: {
     alias: {
       '@atomos/prime': resolve(__dirname, '../atomos-prime.dev/src/index.ts'),
