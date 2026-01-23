@@ -36,7 +36,7 @@ export const RouterDemo = () => {
                     <a
                         href="#about"
                         className={`router-link ${currentRoute() === 'about' ? 'active' : ''}`}
-                        onClick={(e) => {
+                        onClick={(e: Event) => {
                             e.preventDefault()
                             navigate('about')
                         }}

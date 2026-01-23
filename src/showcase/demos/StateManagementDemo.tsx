@@ -65,7 +65,7 @@ const store = createStore(
         present: { todos: [], filter: 'all' as const },
         future: []
     },
-    undoable(todoReducer, {
+    undoable(todoReducer as IStoreReducer<TodoState>, {
         maxHistory: 50,
         filter: (action: IStoreAction) => action.type !== 'SET_FILTER'
     })
@@ -173,13 +173,13 @@ export function StateManagementDemo() {
                     <h3>⏱️ Time Travel Debugging</h3>
                     <div class="buttons">
                         <button
-                            disabled={!store.getState().present.past?.length}
+                            disabled={!(store.getState().present as any).past?.length}
                             onClick={() => store.dispatch(UndoRedoActions.undo())}
                         >
                             ⬅️ Undo
                         </button>
                         <button
-                            disabled={!store.getState().present.future?.length}
+                            disabled={!(store.getState().present as any).future?.length}
                             onClick={() => store.dispatch(UndoRedoActions.redo())}
                         >
                             Redo ➡️
@@ -187,8 +187,8 @@ export function StateManagementDemo() {
                     </div>
                     <div class="history-info">
                         <p>
-                            History: {store.getState().present.past?.length || 0} past actions,{' '}
-                            {store.getState().present.future?.length || 0} future actions
+                            History: {(store.getState().present as any).past?.length || 0} past actions,{' '}
+                            {(store.getState().present as any).future?.length || 0} future actions
                         </p>
                     </div>
                 </div>

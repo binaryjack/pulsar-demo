@@ -57,7 +57,7 @@ export const HooksDemo = () => {
                         <input
                             type="text"
                             value={name()}
-                            onInput={(e) => setName(e.currentTarget.value)}
+                            onInput={(e: Event) => setName((e.currentTarget as HTMLInputElement).value)}
                             ref={inputRef}
                         />
                     </label>
@@ -69,7 +69,7 @@ export const HooksDemo = () => {
                         <input
                             type="number"
                             value={age()}
-                            onInput={(e) => setAge(Number(e.currentTarget.value))}
+                            onInput={(e: Event) => setAge(Number((e.currentTarget as HTMLInputElement).value))}
                         />
                     </label>
                     <div style="margin-top: 10px;">

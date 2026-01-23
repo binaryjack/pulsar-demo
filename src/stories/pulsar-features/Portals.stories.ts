@@ -1,4 +1,4 @@
-import { Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Input, Typography } from '@atomos/prime'
+// import { Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Input, Typography } from '@atomos/prime'
 import type { Meta, StoryObj } from '@storybook/html'
 
 const meta: Meta = {
@@ -32,7 +32,7 @@ export const ModalDialog: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder('h2').build(),
+      config: new ComponentConfigBuilder().build(),
       children: 'Modal Portal Demo'
     })
     container.appendChild(title)
@@ -43,7 +43,7 @@ export const ModalDialog: Story = {
     container.appendChild(desc)
 
     const contentCard = Card({
-      config: new ComponentConfigBuilder('default').build(),
+      config: new ComponentConfigBuilder().build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -111,7 +111,7 @@ export const ModalDialog: Story = {
       document.head.appendChild(style)
 
       const modalCard = Card({
-        config: new ComponentConfigBuilder('default').build(),
+        config: new ComponentConfigBuilder().build(),
         styling: new ComponentStylingBuilder().build(),
         children: ''
       })
@@ -135,7 +135,7 @@ export const ModalDialog: Story = {
           </p>
         </div>
         ${Input({
-          config: new ComponentConfigBuilder('default').build(),
+          config: new ComponentConfigBuilder().build(),
           styling: new ComponentStylingBuilder().build(),
           placeholder: 'You can interact with modal content',
           value: ''
@@ -180,7 +180,7 @@ export const ToastNotifications: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder('h2').build(),
+      config: new ComponentConfigBuilder().build(),
       children: 'Toast Notifications Portal'
     })
     container.appendChild(title)
@@ -289,7 +289,7 @@ export const ToastNotifications: Story = {
     container.appendChild(btnContainer)
 
     const note = Card({
-      config: new ComponentConfigBuilder('default').build(),
+      config: new ComponentConfigBuilder().build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })

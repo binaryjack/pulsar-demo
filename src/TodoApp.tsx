@@ -86,8 +86,8 @@ export const TodoApp = ({ initialTodos = [] as ITodo[] }: ITodoAppProps) => {
                     <input
                         type="text"
                         value={input()}
-                        onInput={(e) => setInput(e.currentTarget?.value)}
-                        onKeyPress={(e) => {
+                        onInput={(e: Event) => setInput((e.currentTarget as HTMLInputElement)?.value)}
+                        onKeyPress={(e: KeyboardEvent) => {
                             if (e.key === 'Enter') addTodo()
                         }}
                         placeholder="What needs to be done?"

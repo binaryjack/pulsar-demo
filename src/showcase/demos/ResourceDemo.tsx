@@ -2,9 +2,7 @@
  * Resource Demo - Async data loading
  */
 
-import { Show } from "pulsar"
-import { useState } from "pulsar"
-import { createResource } from "pulsar"
+import { createResource, Show, useState } from "pulsar";
 
 // Simulated API calls
 const fetchUser = async (id: number): Promise<{ id: number; name: string; email: string }> => {
@@ -52,7 +50,7 @@ export const ResourceDemo = () => {
                     <input
                         type="number"
                         value={userId()}
-                        onInput={(e) => setUserId(Number(e.currentTarget.value))}
+                        onInput={(e: Event) => setUserId(Number((e.currentTarget as HTMLInputElement).value))}
                         min="1"
                         max="999"
                     />

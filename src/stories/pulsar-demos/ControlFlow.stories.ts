@@ -1,4 +1,4 @@
-import { Badge, Button, Checkbox, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
+// import { Badge, Button, Checkbox, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
 import type { Meta, StoryObj } from '@storybook/html'
 import { createSignal } from 'pulsar/reactivity'
 
@@ -94,8 +94,8 @@ export const KeyedListUpdates: Story = {
       styling: new ComponentStylingBuilder().build(),
       placeholder: 'Add a new todo...',
       value: input(),
-      oninput: (e) => setInput((e.target as HTMLInputElement).value),
-      onkeypress: (e) => {
+      oninput: (e: Event) => setInput(((e.target as HTMLInputElement).value)),
+      onkeypress: (e: KeyboardEvent) => {
         if (e.key === 'Enter' && input().trim()) {
           const newTodo: ITodo = {
             id: Date.now(),
@@ -161,7 +161,7 @@ export const KeyedListUpdates: Story = {
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       checked: showCompleted(),
-      onchange: (e) => {
+      onchange: (e: Event) => {
         setShowCompleted((e.target as HTMLInputElement).checked)
         renderTodoList()
       }

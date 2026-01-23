@@ -1,4 +1,4 @@
-import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Spinner, Typography } from '@atomos/prime'
+// import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Spinner, Typography } from '@atomos/prime'
 import type { Meta, StoryObj } from '@storybook/html'
 import { createResource } from 'pulsar/resource'
 
@@ -53,7 +53,7 @@ export const BasicResourceFetching: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder('h2').build(),
+      config: new ComponentConfigBuilder().build(),
       children: 'User Profile Loader'
     })
     container.appendChild(title)
@@ -88,7 +88,7 @@ export const BasicResourceFetching: Story = {
 
     // Content card
     const contentCard = Card({
-      config: new ComponentConfigBuilder('default').build(),
+      config: new ComponentConfigBuilder().build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -154,7 +154,7 @@ export const ParallelResourceLoading: Story = {
     container.style.cssText = 'padding: 20px; max-width: 800px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder('h2').build(),
+      config: new ComponentConfigBuilder().build(),
       children: 'Parallel Data Loading'
     })
     container.appendChild(title)
@@ -183,7 +183,7 @@ export const ParallelResourceLoading: Story = {
 
     // User card
     const userCard = Card({
-      config: new ComponentConfigBuilder('default').build(),
+      config: new ComponentConfigBuilder().build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -191,7 +191,7 @@ export const ParallelResourceLoading: Story = {
 
     // Posts card
     const postsCard = Card({
-      config: new ComponentConfigBuilder('default').build(),
+      config: new ComponentConfigBuilder().build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })

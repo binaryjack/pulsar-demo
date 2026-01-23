@@ -2,8 +2,7 @@
  * Reactivity Demo - Signals, Effects, Memos
  */
 
-import { useState } from "pulsar"
-import { createEffect, createMemo } from "pulsar"
+import { createEffect, createMemo, useState } from "pulsar"
 
 export const ReactivityDemo = () => {
     const [count, setCount] = useState(0)
@@ -82,7 +81,7 @@ export const ReactivityDemo = () => {
                         <input
                             type="number"
                             value={multiplier()}
-                            onInput={(e) => setMultiplier(Number(e.currentTarget.value))}
+                            onInput={(e: Event) => setMultiplier(Number((e.currentTarget as HTMLInputElement).value))}
                         />
                     </label>
                 </div>

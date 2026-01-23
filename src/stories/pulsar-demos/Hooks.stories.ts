@@ -1,4 +1,4 @@
-import { Button, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
+// import { Button, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
 import type { Meta, StoryObj } from '@storybook/html'
 import { createEffect, createMemo, createSignal } from 'pulsar'
 import { useEffect, useState } from 'pulsar/hooks'
@@ -106,7 +106,7 @@ export const UseStateDemo: Story = {
       styling: new ComponentStylingBuilder().build(),
       placeholder: 'Enter your name',
       value: name(),
-      oninput: (e) => {
+      oninput: (e: Event) => {
         setName((e.target as HTMLInputElement).value)
         greeting.textContent = `Hello, ${name()}! 👋`
       }
@@ -136,8 +136,8 @@ export const UseStateDemo: Story = {
       styling: new ComponentStylingBuilder().build(),
       placeholder: 'Add an item',
       value: inputValue(),
-      oninput: (e) => setInputValue((e.target as HTMLInputElement).value),
-      onkeypress: (e) => {
+      oninput: (e: Event) => setInputValue(((e.target as HTMLInputElement).value)),
+      onkeypress: (e: KeyboardEvent) => {
         if (e.key === 'Enter' && inputValue().trim()) {
           setItems([...items(), inputValue()])
           setInputValue('')

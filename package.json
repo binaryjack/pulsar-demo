@@ -12,9 +12,9 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@pulsar/ui": "workspace:*",
-    "@pulsar/transformer": "workspace:*",
-    "@pulsar/vite-plugin": "workspace:*",
+    "@pulsar-framework/ui": "workspace:*",
+    "@pulsar-framework/transformer": "workspace:*",
+    "@pulsar-framework/vite-plugin": "workspace:*",
     "@pulsar-framework/core": "workspace:*",
     "@pulsar-framework/design-tokens": "workspace:*"
   },
