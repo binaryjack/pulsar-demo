@@ -119,29 +119,39 @@ export const ModalDialog: Story = {
       modalCard.style.cssText = `
         max-width: 500px;
         width: 90%;
-        padding: 30px;
         animation: slideUp 0.3s ease-out;
+        background: white;
       `
 
-      modalCard.innerHTML = `
-        <h2 style="margin: 0 0 20px 0;">Modal Dialog</h2>
-        <p style="margin: 15px 0; color: #666;">
-          This modal is rendered using a Portal. It appears above everything else,
-          even though its parent container has overflow: hidden!
-        </p>
-        <div style="background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #059669;">
-          <strong style="color: #059669;">Portal Benefit:</strong>
-          <p style="margin: 5px 0 0 0; font-size: 14px;">
-            Portals solve z-index and overflow issues by rendering content at a different DOM location.
-          </p>
-        </div>
-        ${Input({
-          config: new ComponentConfigBuilder('primary').build(),
-          styling: new ComponentStylingBuilder().build(),
-          placeholder: 'You can interact with modal content',
-          value: ''
-        }).outerHTML}
-      `
+      const modalTitle = document.createElement('h2')
+      modalTitle.style.cssText = 'margin: 0 0 20px 0;'
+      modalTitle.textContent = 'Modal Dialog'
+      
+      const modalDesc = document.createElement('p')
+      modalDesc.style.cssText = 'margin: 15px 0; color: #666;'
+      modalDesc.textContent = 'This modal is rendered using a Portal. It appears above everything else, even though its parent container has overflow: hidden!'
+      
+      const benefitDiv = document.createElement('div')
+      benefitDiv.style.cssText = 'background: #f0fdf4; padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #059669;'
+      const benefitStrong = document.createElement('strong')
+      benefitStrong.style.color = '#059669'
+      benefitStrong.textContent = 'Portal Benefit:'
+      const benefitP = document.createElement('p')
+      benefitP.style.cssText = 'margin: 5px 0 0 0; font-size: 14px;'
+      benefitP.textContent = 'Portals solve z-index and overflow issues by rendering content at a different DOM location.'
+      benefitDiv.appendChild(benefitStrong)
+      benefitDiv.appendChild(benefitP)
+      
+      modalCard.appendChild(modalTitle)
+      modalCard.appendChild(modalDesc)
+      modalCard.appendChild(benefitDiv)
+
+      const modalInput = Input({
+        config: new ComponentConfigBuilder('primary').build(),
+        styling: new ComponentStylingBuilder().build(),
+        placeholder: 'You can interact with modal content'
+      })
+      modalCard.appendChild(modalInput)
 
       const closeBtn = Button({
         config: new ComponentConfigBuilder('error').build(),

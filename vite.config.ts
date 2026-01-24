@@ -1,5 +1,4 @@
 import { pulsarPlugin } from '@pulsar/vite-plugin'
-import { resolve } from 'path'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -7,9 +6,7 @@ export default defineConfig({
     pulsarPlugin()
   ],
   resolve: {
-    alias: {
-      '@atomos/prime': resolve(__dirname, '../atomos-prime.dev/src/index.ts'),
-    }
+    alias: {}
   },
   optimizeDeps: {
     include: [
@@ -23,8 +20,7 @@ export default defineConfig({
       'pulsar/portal',
       'pulsar/error-boundary',
       'pulsar/di',
-      'pulsar/control-flow',
-      '@atomos/prime'
+      'pulsar/control-flow'
     ],
   },
   esbuild: {

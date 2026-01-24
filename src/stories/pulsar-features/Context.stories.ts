@@ -270,32 +270,40 @@ export const UserAuthContext: Story = {
 
     const renderAuthUI = () => {
       if (!currentUser.isLoggedIn) {
-        userContent.innerHTML = `
-          <h3 style="margin: 0 0 15px 0;">Login</h3>
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            ${Input({
-              config: new ComponentConfigBuilder('primary').build(),
-              styling: new ComponentStylingBuilder().build(),
-              placeholder: 'Username',
-              value: ''
-            }).outerHTML}
-            <select style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-            ${Button({
-              config: new ComponentConfigBuilder('primary').build(),
-              styling: new ComponentStylingBuilder().build(),
-              children: '🔓 Login'
-            }).outerHTML}
-          </div>
-        `
+        userContent.innerHTML = ''
+        
+        const heading = document.createElement('h3')
+        heading.style.cssText = 'margin: 0 0 15px 0;'
+        heading.textContent = 'Login'
+        userContent.appendChild(heading)
 
-        const loginBtn = userContent.querySelector('button')
-        const usernameInput = userContent.querySelector('input') as HTMLInputElement
-        const roleSelect = userContent.querySelector('select') as HTMLSelectElement
+        const formContainer = document.createElement('div')
+        formContainer.style.cssText = 'display: flex; flex-direction: column; gap: 10px;'
 
-        loginBtn?.addEventListener('click', () => {
+        const usernameInput = Input({
+          config: new ComponentConfigBuilder('primary').build(),
+          styling: new ComponentStylingBuilder().build(),
+          placeholder: 'Username'
+        }) as HTMLInputElement
+
+        const roleSelect = document.createElement('select')
+        roleSelect.style.cssText = 'padding: 10px; border: 1px solid #ddd; border-radius: 6px;'
+        const userOption = document.createElement('option')
+        userOption.value = 'user'
+        userOption.textContent = 'User'
+        const adminOption = document.createElement('option')
+        adminOption.value = 'admin'
+        adminOption.textContent = 'Admin'
+        roleSelect.appendChild(userOption)
+        roleSelect.appendChild(adminOption)
+
+        const loginBtn = Button({
+          config: new ComponentConfigBuilder('primary').build(),
+          styling: new ComponentStylingBuilder().build(),
+          children: '🔓 Login'
+        })
+
+        loginBtn.addEventListener('click', () => {
           const username = usernameInput.value.trim() || 'User'
           const role = roleSelect.value as 'user' | 'admin'
           
@@ -308,26 +316,38 @@ export const UserAuthContext: Story = {
           renderAuthUI()
           renderUserInfo()
         })
-      } else {
-        userContent.innerHTML = `
-          <div style="display: flex; align-items: center; justify-content: space-between;">
-            <div>
-              <h3 style="margin: 0 0 5px 0;">👤 ${currentUser.username}</h3>
-              ${Badge({
-                config: new ComponentConfigBuilder(currentUser.role === 'admin' ? 'primary' : 'secondary').build(),
-                children: currentUser.role.toUpperCase()
-              }).outerHTML}
-            </div>
-            ${Button({
-              config: new ComponentConfigBuilder('error').build(),
-              styling: new ComponentStylingBuilder().build(),
-              children: '🔒 Logout'
-            }).outerHTML}
-          </div>
-        `
 
-        const logoutBtn = userContent.querySelector('button')
-        logoutBtn?.addEventListener('click', () => {
+        formContainer.appendChild(usernameInput)
+        formContainer.appendChild(roleSelect)
+        formContainer.appendChild(loginBtn)
+        userContent.appendChild(formContainer)
+      } else {
+        userContent.innerHTML = ''
+
+        const container = document.createElement('div')
+        container.style.cssText = 'display: flex; align-items: center; justify-content: space-between;'
+
+        const userInfo = document.createElement('div')
+        
+        const userHeading = document.createElement('h3')
+        userHeading.style.cssText = 'margin: 0 0 5px 0;'
+        userHeading.textContent = `👤 ${currentUser.username}`
+        
+        const roleBadge = Badge({
+          config: new ComponentConfigBuilder(currentUser.role === 'admin' ? 'primary' : 'secondary').build(),
+          children: currentUser.role.toUpperCase()
+        })
+
+        userInfo.appendChild(userHeading)
+        userInfo.appendChild(roleBadge)
+
+        const logoutBtn = Button({
+          config: new ComponentConfigBuilder('error').build(),
+          styling: new ComponentStylingBuilder().build(),
+          children: '🔒 Logout'
+        })
+
+        logoutBtn.addEventListener('click', () => {
           currentUser = {
             username: 'Guest',
             role: 'guest',
@@ -336,6 +356,10 @@ export const UserAuthContext: Story = {
           renderAuthUI()
           renderUserInfo()
         })
+
+        container.appendChild(userInfo)
+        container.appendChild(logoutBtn)
+        userContent.appendChild(container)
       }
     }
 

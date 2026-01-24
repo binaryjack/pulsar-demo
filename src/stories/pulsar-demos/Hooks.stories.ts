@@ -212,7 +212,8 @@ export const UseEffectDemo: Story = {
 
     const addLog = (message: string) => {
       const timestamp = new Date().toLocaleTimeString()
-      setLogs([...logs(), `[${timestamp}] ${message}`])
+      // Use functional update to avoid reading logs() which would create dependency
+      setLogs((prevLogs) => [...prevLogs, `[${timestamp}] ${message}`])
     }
 
     // Effect for timer
@@ -398,6 +399,8 @@ export const UseMemoDemo: Story = {
         children: label,
         onclick: () => {
           setFilter(value as any)
+          // Force immediate update
+          updateUI()
         }
       })
       buttons.push(btn)
@@ -411,8 +414,7 @@ export const UseMemoDemo: Story = {
     itemsDisplay.style.cssText = 'display: flex; gap: 10px; flex-wrap: wrap; margin: 20px 0;'
     container.appendChild(itemsDisplay)
 
-    // Reactively update everything when filter changes
-    createEffect(() => {
+    const updateUI = () => {
       const currentFilter = filter()
       const filtered = filteredItems()
       const currentSum = sum()
@@ -420,7 +422,6 @@ export const UseMemoDemo: Story = {
       // Update button styles
       buttons.forEach((btn, idx) => {
         const isActive = filterButtons[idx].value === currentFilter
-        btn.className = ''
         // Re-apply appropriate styling
         if (isActive) {
           btn.style.cssText = 'background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600;'
@@ -442,6 +443,11 @@ export const UseMemoDemo: Story = {
         badge.style.cssText = 'background: #667eea; color: white; padding: 15px 25px; border-radius: 8px; font-size: 1.2rem; font-weight: 600; min-width: 50px; text-align: center;'
         itemsDisplay.appendChild(badge)
       })
+    }
+
+    // Reactively update everything when filter changes
+    createEffect(() => {
+      updateUI()
     })
 
     return container
