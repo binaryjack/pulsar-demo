@@ -1,4 +1,5 @@
 // import { Badge, Button, Checkbox, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
+import { Badge, Button, Checkbox, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@pulsar-framework/ui'
 import type { Meta, StoryObj } from '@storybook/html'
 import { createSignal } from 'pulsar/reactivity'
 

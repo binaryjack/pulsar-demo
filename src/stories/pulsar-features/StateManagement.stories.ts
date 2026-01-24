@@ -82,7 +82,7 @@ export const TodoAppWithTimeTravel: Story = {
 
     // Title
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Todo App with Time Travel'
     })
     container.appendChild(title)
@@ -95,7 +95,7 @@ export const TodoAppWithTimeTravel: Story = {
 
     // Stats card
     const statsCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -183,7 +183,7 @@ export const TodoAppWithTimeTravel: Story = {
     formContainer.style.cssText = 'display: flex; gap: 10px; margin: 20px 0;'
     
     const todoInput = Input({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       placeholder: 'What needs to be done?',
       value: ''
@@ -266,7 +266,7 @@ export const TodoAppWithTimeTravel: Story = {
       
       filtered.forEach(todo => {
         const todoCard = Card({
-          config: new ComponentConfigBuilder().build(),
+          config: new ComponentConfigBuilder('primary').build(),
           styling: new ComponentStylingBuilder().build(),
           children: ''
         })
@@ -339,7 +339,7 @@ export const CounterWithPersistence: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Persistent Counter'
     })
     container.appendChild(title)
@@ -350,7 +350,7 @@ export const CounterWithPersistence: Story = {
     container.appendChild(desc)
 
     const countCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })

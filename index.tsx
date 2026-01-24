@@ -2,21 +2,11 @@
  * Application entry point with routing
  */
 
-import { bootstrapApp } from "pulsar"
-import { Route, Router } from "pulsar"
+import { bootstrapApp, Route, Router } from "pulsar"
 import { AppContext } from './src/AppContext'
 import { Counter } from './src/Counter'
 import { TodoApp } from './src/TodoApp'
-import { BatchDemo } from './src/showcase/demos/BatchDemo'
-import { ControlFlowDemo } from './src/showcase/demos/ControlFlowDemo'
-import { DIDemo } from './src/showcase/demos/DIDemo'
-import { ErrorBoundaryDemo } from './src/showcase/demos/ErrorBoundaryDemo'
-import { HooksDemo } from './src/showcase/demos/HooksDemo'
-import { LifecycleDemo } from './src/showcase/demos/LifecycleDemo'
-import { PortalDemo } from './src/showcase/demos/PortalDemo'
-import { ReactivityDemo } from './src/showcase/demos/ReactivityDemo'
-import { ResourceDemo } from './src/showcase/demos/ResourceDemo'
-import { RouterDemo } from './src/showcase/demos/RouterDemo'
+
 
 // Home component with navigation
 const Home = (): HTMLElement => {
@@ -116,17 +106,17 @@ const homeRoute = Route({ path: '/', component: Home, default: true, label: 'Hom
 const counterRoute = Route({ path: '/counter', component: () => <Counter initialCount={0} />, label: 'Counter' })
 const todoRoute = Route({ path: '/todo', component: () => <TodoApp initialTodos={[]} />, label: 'Todo' })
 
-// Showcase demo routes
-const reactivityRoute = Route({ path: '/reactivity', component: () => <ReactivityDemo />, label: 'Reactivity' })
-const hooksRoute = Route({ path: '/hooks', component: () => <HooksDemo />, label: 'Hooks' })
-const controlFlowRoute = Route({ path: '/control-flow', component: () => <ControlFlowDemo />, label: 'Control Flow' })
-const errorBoundaryRoute = Route({ path: '/error-boundary', component: () => <ErrorBoundaryDemo />, label: 'Error Boundaries' })
-const resourceRoute = Route({ path: '/resource', component: () => <ResourceDemo />, label: 'Resources' })
-const portalRoute = Route({ path: '/portal', component: () => <PortalDemo />, label: 'Portals' })
-const batchRoute = Route({ path: '/batch', component: () => <BatchDemo />, label: 'Batch Updates' })
-const lifecycleRoute = Route({ path: '/lifecycle', component: () => <LifecycleDemo />, label: 'Lifecycle' })
-const diRoute = Route({ path: '/di', component: () => <DIDemo />, label: 'Dependency Injection' })
-const routerDemoRoute = Route({ path: '/router-demo', component: () => <RouterDemo />, label: 'Router Demo' })
+// // Showcase demo routes
+// const reactivityRoute = Route({ path: '/reactivity', component: () => <ReactivityDemo />, label: 'Reactivity' })
+// const hooksRoute = Route({ path: '/hooks', component: () => <HooksDemo />, label: 'Hooks' })
+// const controlFlowRoute = Route({ path: '/control-flow', component: () => <ControlFlowDemo />, label: 'Control Flow' })
+// const errorBoundaryRoute = Route({ path: '/error-boundary', component: () => <ErrorBoundaryDemo />, label: 'Error Boundaries' })
+// const resourceRoute = Route({ path: '/resource', component: () => <ResourceDemo />, label: 'Resources' })
+// const portalRoute = Route({ path: '/portal', component: () => <PortalDemo />, label: 'Portals' })
+// const batchRoute = Route({ path: '/batch', component: () => <BatchDemo />, label: 'Batch Updates' })
+// const lifecycleRoute = Route({ path: '/lifecycle', component: () => <LifecycleDemo />, label: 'Lifecycle' })
+// const diRoute = Route({ path: '/di', component: () => <DIDemo />, label: 'Dependency Injection' })
+// const routerDemoRoute = Route({ path: '/router-demo', component: () => <RouterDemo />, label: 'Router Demo' })
 
 // Declarative app with routing
 const app = (
@@ -141,16 +131,16 @@ const app = (
             homeRoute, 
             counterRoute, 
             todoRoute,
-            reactivityRoute,
-            hooksRoute,
-            controlFlowRoute,
-            errorBoundaryRoute,
-            resourceRoute,
-            portalRoute,
-            batchRoute,
-            lifecycleRoute,
-            diRoute,
-            routerDemoRoute
+            // reactivityRoute,
+            // hooksRoute,
+            // controlFlowRoute,
+            // errorBoundaryRoute,
+            // resourceRoute,
+            // portalRoute,
+            // batchRoute,
+            // lifecycleRoute,
+            // diRoute,
+            // routerDemoRoute
         ]} />
     </AppContext.Provider>
 )

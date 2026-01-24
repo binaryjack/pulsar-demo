@@ -1,4 +1,5 @@
 // import { Button, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@atomos/prime'
+import { Button, ComponentConfigBuilder, ComponentStylingBuilder, Input } from '@pulsar-framework/ui'
 import type { Meta, StoryObj } from '@storybook/html'
 import { createEffect, createMemo, createSignal } from 'pulsar'
 import { useEffect, useState } from 'pulsar/hooks'

@@ -34,7 +34,7 @@ export const BasicErrorHandling: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Error Boundary Demo'
     })
     container.appendChild(title)
@@ -52,7 +52,7 @@ export const BasicErrorHandling: Story = {
 
     const renderSuccessContent = () => {
       const successCard = Card({
-        config: new ComponentConfigBuilder().build(),
+        config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
         children: ''
       })
@@ -71,7 +71,7 @@ export const BasicErrorHandling: Story = {
 
     const renderErrorContent = () => {
       const errorCard = Card({
-        config: new ComponentConfigBuilder().build(),
+        config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
         children: ''
       })
@@ -180,7 +180,7 @@ export const MultipleErrorBoundaries: Story = {
     container.style.cssText = 'padding: 20px; max-width: 800px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Multiple Isolated Error Boundaries'
     })
     container.appendChild(title)
@@ -231,7 +231,7 @@ export const MultipleErrorBoundaries: Story = {
         contentDiv.appendChild(badge)
 
         const card = Card({
-          config: new ComponentConfigBuilder().build(),
+          config: new ComponentConfigBuilder('primary').build(),
           styling: new ComponentStylingBuilder().build(),
           children: contentDiv
         })
@@ -265,7 +265,7 @@ export const MultipleErrorBoundaries: Story = {
         contentDiv.appendChild(badge)
 
         const card = Card({
-          config: new ComponentConfigBuilder().build(),
+          config: new ComponentConfigBuilder('primary').build(),
           styling: new ComponentStylingBuilder().build(),
           children: contentDiv
         })

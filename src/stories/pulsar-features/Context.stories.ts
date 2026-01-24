@@ -49,7 +49,7 @@ export const ThemeContextDemo: Story = {
     container.style.cssText = 'padding: 20px; max-width: 800px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Theme Context Demo'
     })
     container.appendChild(title)
@@ -67,7 +67,7 @@ export const ThemeContextDemo: Story = {
     }
 
     const controlsCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -175,7 +175,7 @@ export const ThemeContextDemo: Story = {
       themedArea.innerHTML = ''
       
       const demoCard = Card({
-        config: new ComponentConfigBuilder().build(),
+        config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
         children: ''
       })
@@ -248,7 +248,7 @@ export const UserAuthContext: Story = {
     container.style.cssText = 'padding: 20px; max-width: 600px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'User Authentication Context'
     })
     container.appendChild(title)
@@ -260,7 +260,7 @@ export const UserAuthContext: Story = {
 
     // Auth controls
     const authCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -274,7 +274,7 @@ export const UserAuthContext: Story = {
           <h3 style="margin: 0 0 15px 0;">Login</h3>
           <div style="display: flex; flex-direction: column; gap: 10px;">
             ${Input({
-              config: new ComponentConfigBuilder().build(),
+              config: new ComponentConfigBuilder('primary').build(),
               styling: new ComponentStylingBuilder().build(),
               placeholder: 'Username',
               value: ''
@@ -351,7 +351,7 @@ export const UserAuthContext: Story = {
       infoArea.innerHTML = ''
 
       const infoCard = Card({
-        config: new ComponentConfigBuilder().build(),
+        config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
         children: ''
       })

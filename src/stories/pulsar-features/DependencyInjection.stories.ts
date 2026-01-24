@@ -1,4 +1,5 @@
 // import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@atomos/prime'
+import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@pulsar-framework/ui'
 import type { Meta, StoryObj } from '@storybook/html'
 import { ServiceLocator, ServiceManager } from 'pulsar/di'
 
@@ -73,7 +74,7 @@ export const SingletonServices: Story = {
     container.style.cssText = 'padding: 20px; max-width: 800px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Singleton Service Pattern'
     })
     container.appendChild(title)
@@ -85,7 +86,7 @@ export const SingletonServices: Story = {
 
     // Component A
     const componentA = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -115,7 +116,7 @@ export const SingletonServices: Story = {
 
     // Component B
     const componentB = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -145,7 +146,7 @@ export const SingletonServices: Story = {
 
     // Log history display
     const historyCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -234,7 +235,7 @@ export const TransientServices: Story = {
     container.style.cssText = 'padding: 20px; max-width: 800px;'
 
     const title = Typography({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       children: 'Transient Service Pattern'
     })
     container.appendChild(title)
@@ -245,7 +246,7 @@ export const TransientServices: Story = {
     container.appendChild(desc)
 
     const instancesCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })
@@ -298,7 +299,7 @@ export const TransientServices: Story = {
     container.appendChild(instancesCard)
 
     const comparisonCard = Card({
-      config: new ComponentConfigBuilder().build(),
+      config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: ''
     })

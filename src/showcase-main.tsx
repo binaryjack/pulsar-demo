@@ -3,7 +3,7 @@
  */
 
 import { bootstrapApp } from "pulsar"
-import { ShowcaseApp } from './showcase/ShowcaseApp'
+// import { ShowcaseApp } from './showcase/ShowcaseApp'
 
 console.log('🚀 pulsar Features Showcase Starting...')
 
@@ -19,6 +19,6 @@ const appRoot = bootstrapApp()
     .build()
 
 // Mount the showcase application
-const app = <ShowcaseApp root={appRoot} />
+// const app = <ShowcaseApp root={appRoot} />
 
 console.log('✅ pulsar Features Showcase Ready!')
