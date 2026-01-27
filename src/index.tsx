@@ -3,7 +3,7 @@
  * Demonstrates the builder pattern with routing
  */
 
-import { AppContextProvider, bootstrapApp, Route, Router } from 'pulsar';
+import { AppContextProvider, bootstrapApp, Route, Router } from '@pulsar-framework/pulsar.dev';
 import { Counter } from './Counter';
 import { TodoApp } from './TodoApp';
 

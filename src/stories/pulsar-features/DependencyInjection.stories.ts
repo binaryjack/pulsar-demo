@@ -1,7 +1,14 @@
 // import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@atomos/prime'
-import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Typography } from '@pulsar-framework/ui'
-import type { Meta, StoryObj } from '@storybook/html'
-import { ServiceLocator, ServiceManager } from 'pulsar/di'
+import { ServiceLocator, ServiceManager } from '@pulsar-framework/pulsar.dev/di';
+import {
+  Badge,
+  Button,
+  Card,
+  ComponentConfigBuilder,
+  ComponentStylingBuilder,
+  Typography,
+} from '@pulsar-framework/ui';
+import type { Meta, StoryObj } from '@storybook/html';
 
 const meta: Meta = {
   title: 'Pulsar Features/Dependency Injection',
@@ -21,256 +28,264 @@ Pulsar provides a full IoC container for managing services:
       },
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj
+export default meta;
+type Story = StoryObj;
 
 // Service interfaces
 interface ILogger {
-  log(message: string): void
-  getHistory(): string[]
+  log(message: string): void;
+  getHistory(): string[];
 }
 
 interface IDataService {
-  fetchData(): Promise<any>
-  saveData(data: any): void
+  fetchData(): Promise<any>;
+  saveData(data: any): void;
 }
 
 interface INotificationService {
-  notify(message: string, type: 'info' | 'success' | 'error'): void
-  getNotifications(): Array<{ message: string; type: string; timestamp: number }>
+  notify(message: string, type: 'info' | 'success' | 'error'): void;
+  getNotifications(): Array<{ message: string; type: string; timestamp: number }>;
 }
 
 export const SingletonServices: Story = {
   render: () => {
     // Create service manager
-    const serviceManager = new ServiceManager()
-    const serviceLocator = new ServiceLocator(serviceManager)
+    const serviceManager = new ServiceManager();
+    const serviceLocator = new ServiceLocator(serviceManager);
 
     // Register logger service (singleton)
     class Logger implements ILogger {
-      private history: string[] = []
-      private instanceId = Math.random().toString(36).slice(2, 8)
+      private history: string[] = [];
+      private instanceId = Math.random().toString(36).slice(2, 8);
 
       log(message: string) {
-        const entry = `[${new Date().toLocaleTimeString()}] ${message}`
-        this.history.push(entry)
-        console.log(entry)
+        const entry = `[${new Date().toLocaleTimeString()}] ${message}`;
+        this.history.push(entry);
+        console.log(entry);
       }
 
       getHistory() {
-        return this.history
+        return this.history;
       }
 
       getInstanceId() {
-        return this.instanceId
+        return this.instanceId;
       }
     }
 
-    serviceManager.register('logger', () => new Logger(), { lifetime: 'singleton' })
+    serviceManager.register('logger', () => new Logger(), { lifetime: 'singleton' });
 
-    const container = document.createElement('div')
-    container.style.cssText = 'padding: 20px; max-width: 800px;'
+    const container = document.createElement('div');
+    container.style.cssText = 'padding: 20px; max-width: 800px;';
 
     const title = Typography({
       config: new ComponentConfigBuilder('primary').build(),
-      children: 'Singleton Service Pattern'
-    })
-    container.appendChild(title)
+      children: 'Singleton Service Pattern',
+    });
+    container.appendChild(title);
 
-    const desc = document.createElement('p')
-    desc.style.cssText = 'background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;'
-    desc.textContent = '🔧 Singleton services are created once and shared across the entire application. Multiple resolves return the same instance!'
-    container.appendChild(desc)
+    const desc = document.createElement('p');
+    desc.style.cssText = 'background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;';
+    desc.textContent =
+      '🔧 Singleton services are created once and shared across the entire application. Multiple resolves return the same instance!';
+    container.appendChild(desc);
 
     // Component A
     const componentA = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    componentA.style.cssText = 'padding: 20px; margin: 20px 0;'
+      children: '',
+    });
+    componentA.style.cssText = 'padding: 20px; margin: 20px 0;';
 
-    const componentAContent = document.createElement('div')
+    const componentAContent = document.createElement('div');
     componentAContent.innerHTML = `
       <h3 style="margin: 0 0 15px 0;">Component A</h3>
       <p style="color: #666; margin-bottom: 15px;">
         This component uses the Logger service
       </p>
-    `
+    `;
 
     const logBtnA = Button({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: '📝 Log from A',
       onclick: () => {
-        const logger = serviceLocator.get<Logger>('logger')
-        logger.log('Message from Component A')
-        updateLogHistory()
-      }
-    })
-    componentAContent.appendChild(logBtnA)
-    componentA.appendChild(componentAContent)
-    container.appendChild(componentA)
+        const logger = serviceLocator.get<Logger>('logger');
+        logger.log('Message from Component A');
+        updateLogHistory();
+      },
+    });
+    componentAContent.appendChild(logBtnA);
+    componentA.appendChild(componentAContent);
+    container.appendChild(componentA);
 
     // Component B
     const componentB = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    componentB.style.cssText = 'padding: 20px; margin: 20px 0;'
+      children: '',
+    });
+    componentB.style.cssText = 'padding: 20px; margin: 20px 0;';
 
-    const componentBContent = document.createElement('div')
+    const componentBContent = document.createElement('div');
     componentBContent.innerHTML = `
       <h3 style="margin: 0 0 15px 0;">Component B</h3>
       <p style="color: #666; margin-bottom: 15px;">
         This component also uses the Logger service (same instance!)
       </p>
-    `
+    `;
 
     const logBtnB = Button({
       config: new ComponentConfigBuilder('secondary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: '📝 Log from B',
       onclick: () => {
-        const logger = serviceLocator.get<Logger>('logger')
-        logger.log('Message from Component B')
-        updateLogHistory()
-      }
-    })
-    componentBContent.appendChild(logBtnB)
-    componentB.appendChild(componentBContent)
-    container.appendChild(componentB)
+        const logger = serviceLocator.get<Logger>('logger');
+        logger.log('Message from Component B');
+        updateLogHistory();
+      },
+    });
+    componentBContent.appendChild(logBtnB);
+    componentB.appendChild(componentBContent);
+    container.appendChild(componentB);
 
     // Log history display
     const historyCard = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    historyCard.style.cssText = 'padding: 20px; margin: 20px 0; background: #1e293b; color: white;'
+      children: '',
+    });
+    historyCard.style.cssText = 'padding: 20px; margin: 20px 0; background: #1e293b; color: white;';
 
-    const historyContent = document.createElement('div')
+    const historyContent = document.createElement('div');
     historyContent.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
         <h3 style="margin: 0; color: white;">📋 Shared Log History</h3>
-        ${Badge({
-          config: new ComponentConfigBuilder('success').build(),
-          children: 'Singleton'
-        }).outerHTML}
+        ${
+          Badge({
+            config: new ComponentConfigBuilder('success').build(),
+            children: 'Singleton',
+          }).outerHTML
+        }
       </div>
       <div style="font-family: monospace; font-size: 13px; line-height: 1.8;" id="log-output">
         <p style="color: #94a3b8; margin: 0;">No logs yet. Click buttons above to log messages.</p>
       </div>
-    `
+    `;
 
     const updateLogHistory = () => {
-      const logger = serviceLocator.get<Logger>('logger')
-      const history = logger.getHistory()
-      const logOutput = historyContent.querySelector('#log-output')
-      
+      const logger = serviceLocator.get<Logger>('logger');
+      const history = logger.getHistory();
+      const logOutput = historyContent.querySelector('#log-output');
+
       if (logOutput) {
         if (history.length === 0) {
-          logOutput.innerHTML = '<p style="color: #94a3b8; margin: 0;">No logs yet.</p>'
+          logOutput.innerHTML = '<p style="color: #94a3b8; margin: 0;">No logs yet.</p>';
         } else {
-          logOutput.innerHTML = history.map(entry => 
-            `<div style="color: #e2e8f0; margin: 5px 0;">${entry}</div>`
-          ).join('')
+          logOutput.innerHTML = history
+            .map((entry) => `<div style="color: #e2e8f0; margin: 5px 0;">${entry}</div>`)
+            .join('');
         }
       }
 
       // Show instance ID to prove it's the same instance
-      const instanceBadge = historyContent.querySelector('.instance-badge')
+      const instanceBadge = historyContent.querySelector('.instance-badge');
       if (!instanceBadge && history.length > 0) {
-        const badge = document.createElement('div')
-        badge.className = 'instance-badge'
-        badge.style.cssText = 'margin-top: 15px; padding: 10px; background: #334155; border-radius: 6px; font-size: 12px;'
+        const badge = document.createElement('div');
+        badge.className = 'instance-badge';
+        badge.style.cssText =
+          'margin-top: 15px; padding: 10px; background: #334155; border-radius: 6px; font-size: 12px;';
         badge.innerHTML = `
           <strong style="color: #22c55e;">✓ Same Instance Confirmed</strong><br>
           <span style="color: #94a3b8;">Instance ID: ${logger.getInstanceId()}</span>
-        `
-        historyContent.appendChild(badge)
+        `;
+        historyContent.appendChild(badge);
       }
-    }
+    };
 
-    historyCard.appendChild(historyContent)
-    container.appendChild(historyCard)
+    historyCard.appendChild(historyContent);
+    container.appendChild(historyCard);
 
-    return container
+    return container;
   },
-}
+};
 
 export const TransientServices: Story = {
   render: () => {
-    const serviceManager = new ServiceManager()
-    const serviceLocator = new ServiceLocator(serviceManager)
+    const serviceManager = new ServiceManager();
+    const serviceLocator = new ServiceLocator(serviceManager);
 
     // Register notification service (transient - new instance each time)
     class NotificationService implements INotificationService {
-      private notifications: Array<{ message: string; type: string; timestamp: number }> = []
-      private instanceId = Math.random().toString(36).slice(2, 8)
+      private notifications: Array<{ message: string; type: string; timestamp: number }> = [];
+      private instanceId = Math.random().toString(36).slice(2, 8);
 
       notify(message: string, type: 'info' | 'success' | 'error') {
         this.notifications.push({
           message,
           type,
-          timestamp: Date.now()
-        })
+          timestamp: Date.now(),
+        });
       }
 
       getNotifications() {
-        return this.notifications
+        return this.notifications;
       }
 
       getInstanceId() {
-        return this.instanceId
+        return this.instanceId;
       }
     }
 
-    serviceManager.register('notifications', () => new NotificationService(), { lifetime: 'transient' })
+    serviceManager.register('notifications', () => new NotificationService(), {
+      lifetime: 'transient',
+    });
 
-    const container = document.createElement('div')
-    container.style.cssText = 'padding: 20px; max-width: 800px;'
+    const container = document.createElement('div');
+    container.style.cssText = 'padding: 20px; max-width: 800px;';
 
     const title = Typography({
       config: new ComponentConfigBuilder('primary').build(),
-      children: 'Transient Service Pattern'
-    })
-    container.appendChild(title)
+      children: 'Transient Service Pattern',
+    });
+    container.appendChild(title);
 
-    const desc = document.createElement('p')
-    desc.style.cssText = 'background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;'
-    desc.textContent = '🔄 Transient services create a new instance every time they are resolved. Each component gets its own instance!'
-    container.appendChild(desc)
+    const desc = document.createElement('p');
+    desc.style.cssText = 'background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;';
+    desc.textContent =
+      '🔄 Transient services create a new instance every time they are resolved. Each component gets its own instance!';
+    container.appendChild(desc);
 
     const instancesCard = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    instancesCard.style.cssText = 'padding: 20px; margin: 20px 0;'
+      children: '',
+    });
+    instancesCard.style.cssText = 'padding: 20px; margin: 20px 0;';
 
-    const instancesContent = document.createElement('div')
+    const instancesContent = document.createElement('div');
     instancesContent.innerHTML = `
       <h3 style="margin: 0 0 15px 0;">Service Instances</h3>
       <div id="instances-list" style="display: grid; gap: 10px; margin-top: 15px;">
         <p style="color: #666;">Click button below to create new service instances</p>
       </div>
-    `
+    `;
 
     const createInstanceBtn = Button({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
       children: '➕ Resolve New Instance',
       onclick: () => {
-        const notification = serviceLocator.get<NotificationService>('notifications')
-        const instancesList = instancesContent.querySelector('#instances-list')
-        
+        const notification = serviceLocator.get<NotificationService>('notifications');
+        const instancesList = instancesContent.querySelector('#instances-list');
+
         if (instancesList) {
-          const instanceCard = document.createElement('div')
-          instanceCard.style.cssText = 'padding: 15px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #059669;'
+          const instanceCard = document.createElement('div');
+          instanceCard.style.cssText =
+            'padding: 15px; background: #f0fdf4; border-radius: 8px; border-left: 4px solid #059669;';
           instanceCard.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <div>
@@ -279,31 +294,33 @@ export const TransientServices: Story = {
                   Instance ID: <code>${notification.getInstanceId()}</code>
                 </p>
               </div>
-              ${Badge({
-                config: new ComponentConfigBuilder('success').build(),
-                children: 'Transient'
-              }).outerHTML}
+              ${
+                Badge({
+                  config: new ComponentConfigBuilder('success').build(),
+                  children: 'Transient',
+                }).outerHTML
+              }
             </div>
-          `
-          
-          if (instancesList.querySelector('p')) {
-            instancesList.innerHTML = ''
-          }
-          instancesList.appendChild(instanceCard)
-        }
-      }
-    })
-    instancesContent.appendChild(createInstanceBtn)
+          `;
 
-    instancesCard.appendChild(instancesContent)
-    container.appendChild(instancesCard)
+          if (instancesList.querySelector('p')) {
+            instancesList.innerHTML = '';
+          }
+          instancesList.appendChild(instanceCard);
+        }
+      },
+    });
+    instancesContent.appendChild(createInstanceBtn);
+
+    instancesCard.appendChild(instancesContent);
+    container.appendChild(instancesCard);
 
     const comparisonCard = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    comparisonCard.style.cssText = 'padding: 20px; margin: 20px 0; background: #eff6ff;'
+      children: '',
+    });
+    comparisonCard.style.cssText = 'padding: 20px; margin: 20px 0; background: #eff6ff;';
     comparisonCard.innerHTML = `
       <h4 style="margin: 0 0 15px 0; color: #3b82f6;">Service Lifetime Comparison</h4>
       <div style="display: grid; gap: 15px;">
@@ -326,9 +343,9 @@ export const TransientServices: Story = {
           </p>
         </div>
       </div>
-    `
-    container.appendChild(comparisonCard)
+    `;
+    container.appendChild(comparisonCard);
 
-    return container
+    return container;
   },
-}
+};

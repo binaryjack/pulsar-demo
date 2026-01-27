@@ -2,7 +2,7 @@
  * Counter application entry point
  */
 
-import { AppContextProvider, bootstrapApp } from 'pulsar';
+import { AppContextProvider, bootstrapApp } from '@pulsar-framework/pulsar.dev';
 import { Counter } from './Counter';
 
 // Build application root

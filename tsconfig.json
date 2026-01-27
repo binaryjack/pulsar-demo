@@ -6,7 +6,7 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "jsxImportSource": "pulsar",
+    "jsxImportSource": "@pulsar-framework/pulsar.dev",
     "declaration": true,
     "sourceMap": true,
     "outDir": "../../dist/demo",
@@ -17,14 +17,8 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-
-
-    "paths": {
-      "@core/*": ["../core/*"],
-      "@transformer/*": ["../transformer/*"]
-    },
     "typeRoots": ["../../types", "../../node_modules/@types"]
   },
-  "include": ["src/**/*", "../../types/**/*", "../pulsar.dev/pulsar.d.ts", "index.tsx"],
+  "include": ["src/**/*", "../../types/**/*", "index.tsx"],
   "exclude": ["node_modules", "dist"]
 }

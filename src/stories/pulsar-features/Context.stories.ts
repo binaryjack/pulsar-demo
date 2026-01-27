@@ -1,6 +1,14 @@
-import { Badge, Button, Card, ComponentConfigBuilder, ComponentStylingBuilder, Input, Typography } from '@pulsar/ui'
-import type { Meta, StoryObj } from '@storybook/html'
-import { createContext } from 'pulsar/context'
+import { createContext } from '@pulsar-framework/pulsar.dev/context';
+import {
+  Badge,
+  Button,
+  Card,
+  ComponentConfigBuilder,
+  ComponentStylingBuilder,
+  Input,
+  Typography,
+} from '@pulsar/ui';
+import type { Meta, StoryObj } from '@storybook/html';
 
 const meta: Meta = {
   title: 'Pulsar Features/Context System',
@@ -20,21 +28,21 @@ Pulsar provides a React-like Context API for prop drilling avoidance:
       },
     },
   },
-}
+};
 
-export default meta
-type Story = StoryObj
+export default meta;
+type Story = StoryObj;
 
 interface ThemeContext {
-  primaryColor: string
-  fontSize: 'small' | 'medium' | 'large'
-  borderRadius: number
+  primaryColor: string;
+  fontSize: 'small' | 'medium' | 'large';
+  borderRadius: number;
 }
 
 interface UserContext {
-  username: string
-  role: 'admin' | 'user' | 'guest'
-  isLoggedIn: boolean
+  username: string;
+  role: 'admin' | 'user' | 'guest';
+  isLoggedIn: boolean;
 }
 
 export const ThemeContextDemo: Story = {
@@ -42,45 +50,48 @@ export const ThemeContextDemo: Story = {
     const ThemeCtx = createContext<ThemeContext>({
       primaryColor: '#667eea',
       fontSize: 'medium',
-      borderRadius: 8
-    })
+      borderRadius: 8,
+    });
 
-    const container = document.createElement('div')
-    container.style.cssText = 'padding: 20px; max-width: 800px;'
+    const container = document.createElement('div');
+    container.style.cssText = 'padding: 20px; max-width: 800px;';
 
     const title = Typography({
       config: new ComponentConfigBuilder('primary').build(),
-      children: 'Theme Context Demo'
-    })
-    container.appendChild(title)
+      children: 'Theme Context Demo',
+    });
+    container.appendChild(title);
 
-    const desc = document.createElement('p')
-    desc.style.cssText = 'background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;'
-    desc.textContent = '🎨 Change theme settings above. Nested components automatically receive updates via context!'
-    container.appendChild(desc)
+    const desc = document.createElement('p');
+    desc.style.cssText = 'background: #e3f2fd; padding: 15px; border-radius: 8px; margin: 15px 0;';
+    desc.textContent =
+      '🎨 Change theme settings above. Nested components automatically receive updates via context!';
+    container.appendChild(desc);
 
     // Theme controls
     let currentTheme: ThemeContext = {
       primaryColor: '#667eea',
       fontSize: 'medium',
-      borderRadius: 8
-    }
+      borderRadius: 8,
+    };
 
     const controlsCard = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    controlsCard.style.cssText = 'padding: 20px; margin: 20px 0;'
+      children: '',
+    });
+    controlsCard.style.cssText = 'padding: 20px; margin: 20px 0;';
 
-    const controlsContent = document.createElement('div')
+    const controlsContent = document.createElement('div');
     controlsContent.innerHTML = `
       <h3 style="margin: 0 0 15px 0;">Theme Controls</h3>
       <div style="display: grid; gap: 15px;">
         <div>
           <label style="display: block; margin-bottom: 5px; font-weight: 500;">Primary Color</label>
           <div style="display: flex; gap: 10px;">
-            ${['#667eea', '#059669', '#dc2626', '#f59e0b', '#8b5cf6'].map(color => `
+            ${['#667eea', '#059669', '#dc2626', '#f59e0b', '#8b5cf6']
+              .map(
+                (color) => `
               <button data-color="${color}" style="
                 width: 40px; 
                 height: 40px; 
@@ -89,13 +100,17 @@ export const ThemeContextDemo: Story = {
                 border: 3px solid ${color === currentTheme.primaryColor ? '#000' : 'transparent'};
                 cursor: pointer;
               "></button>
-            `).join('')}
+            `
+              )
+              .join('')}
           </div>
         </div>
         <div>
           <label style="display: block; margin-bottom: 5px; font-weight: 500;">Font Size</label>
           <div style="display: flex; gap: 10px;" id="font-size-buttons">
-            ${['small', 'medium', 'large'].map(size => `
+            ${['small', 'medium', 'large']
+              .map(
+                (size) => `
               <button data-size="${size}" style="
                 padding: 8px 16px;
                 border-radius: 6px;
@@ -105,7 +120,9 @@ export const ThemeContextDemo: Story = {
                 cursor: pointer;
                 font-weight: 500;
               ">${size.charAt(0).toUpperCase() + size.slice(1)}</button>
-            `).join('')}
+            `
+              )
+              .join('')}
           </div>
         </div>
         <div>
@@ -114,76 +131,83 @@ export const ThemeContextDemo: Story = {
                  style="width: 100%;" data-radius>
         </div>
       </div>
-    `
+    `;
 
     const updateTheme = () => {
-      renderThemedComponents()
-      
+      renderThemedComponents();
+
       // Update active states for color buttons
-      controlsContent.querySelectorAll('[data-color]').forEach(btn => {
-        const color = (btn as HTMLElement).dataset.color
-        ;(btn as HTMLElement).style.border = `3px solid ${color === currentTheme.primaryColor ? '#000' : 'transparent'}`
-      })
-      
+      controlsContent.querySelectorAll('[data-color]').forEach((btn) => {
+        const color = (btn as HTMLElement).dataset.color;
+        (btn as HTMLElement).style.border =
+          `3px solid ${color === currentTheme.primaryColor ? '#000' : 'transparent'}`;
+      });
+
       // Update active states for font size buttons
-      controlsContent.querySelectorAll('[data-size]').forEach(btn => {
-        const size = (btn as HTMLElement).dataset.size
+      controlsContent.querySelectorAll('[data-size]').forEach((btn) => {
+        const size = (btn as HTMLElement).dataset.size;
         if (size === currentTheme.fontSize) {
-          (btn as HTMLElement).style.background = '#667eea'
-          ;(btn as HTMLElement).style.color = 'white'
+          (btn as HTMLElement).style.background = '#667eea';
+          (btn as HTMLElement).style.color = 'white';
         } else {
-          (btn as HTMLElement).style.background = '#f1f5f9'
-          ;(btn as HTMLElement).style.color = '#334155'
+          (btn as HTMLElement).style.background = '#f1f5f9';
+          (btn as HTMLElement).style.color = '#334155';
         }
-      })
-    }
+      });
+    };
 
     // Event listeners for color controls
-    controlsContent.querySelectorAll('[data-color]').forEach(btn => {
+    controlsContent.querySelectorAll('[data-color]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
-        currentTheme.primaryColor = (e.target as HTMLElement).dataset.color || '#667eea'
-        updateTheme()
-      })
-    })
+        currentTheme.primaryColor = (e.target as HTMLElement).dataset.color || '#667eea';
+        updateTheme();
+      });
+    });
 
     // Event listeners for font size controls
-    controlsContent.querySelectorAll('[data-size]').forEach(btn => {
+    controlsContent.querySelectorAll('[data-size]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
-        currentTheme.fontSize = ((e.target as HTMLElement).dataset.size as 'small' | 'medium' | 'large') || 'medium'
-        updateTheme()
-      })
-    })
+        currentTheme.fontSize =
+          ((e.target as HTMLElement).dataset.size as 'small' | 'medium' | 'large') || 'medium';
+        updateTheme();
+      });
+    });
 
-    const radiusSlider = controlsContent.querySelector('[data-radius]') as HTMLInputElement
+    const radiusSlider = controlsContent.querySelector('[data-radius]') as HTMLInputElement;
     radiusSlider?.addEventListener('input', (e) => {
-      currentTheme.borderRadius = Number((e.target as HTMLInputElement).value)
-      const label = controlsContent.querySelector('label[style*="Border Radius"]')
-      if (label) label.textContent = `Border Radius: ${currentTheme.borderRadius}px`
-      updateTheme()
-    })
+      currentTheme.borderRadius = Number((e.target as HTMLInputElement).value);
+      const label = controlsContent.querySelector('label[style*="Border Radius"]');
+      if (label) label.textContent = `Border Radius: ${currentTheme.borderRadius}px`;
+      updateTheme();
+    });
 
-    controlsCard.appendChild(controlsContent)
-    container.appendChild(controlsCard)
+    controlsCard.appendChild(controlsContent);
+    container.appendChild(controlsCard);
 
     // Themed components area
-    const themedArea = document.createElement('div')
-    themedArea.style.cssText = 'margin: 20px 0;'
+    const themedArea = document.createElement('div');
+    themedArea.style.cssText = 'margin: 20px 0;';
 
     const renderThemedComponents = () => {
-      const fontSize = currentTheme.fontSize === 'small' ? '14px' : currentTheme.fontSize === 'large' ? '18px' : '16px'
+      const fontSize =
+        currentTheme.fontSize === 'small'
+          ? '14px'
+          : currentTheme.fontSize === 'large'
+            ? '18px'
+            : '16px';
 
-      themedArea.innerHTML = ''
-      
+      themedArea.innerHTML = '';
+
       const demoCard = Card({
         config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
-        children: ''
-      })
+        children: '',
+      });
       demoCard.style.cssText = `
         padding: 30px; 
         border-radius: ${currentTheme.borderRadius}px;
         font-size: ${fontSize};
-      `
+      `;
 
       demoCard.innerHTML = `
         <h3 style="margin: 0 0 15px 0; color: ${currentTheme.primaryColor};">
@@ -193,18 +217,24 @@ export const ThemeContextDemo: Story = {
           This component reads theme values from context. No prop drilling needed!
         </p>
         <div style="display: flex; gap: 10px; margin-top: 20px;">
-          ${Badge({
-            config: new ComponentConfigBuilder('primary').build(),
-            children: `Color: ${currentTheme.primaryColor}`
-          }).outerHTML}
-          ${Badge({
-            config: new ComponentConfigBuilder('secondary').build(),
-            children: `Size: ${currentTheme.fontSize}`
-          }).outerHTML}
-          ${Badge({
-            config: new ComponentConfigBuilder('success').build(),
-            children: `Radius: ${currentTheme.borderRadius}px`
-          }).outerHTML}
+          ${
+            Badge({
+              config: new ComponentConfigBuilder('primary').build(),
+              children: `Color: ${currentTheme.primaryColor}`,
+            }).outerHTML
+          }
+          ${
+            Badge({
+              config: new ComponentConfigBuilder('secondary').build(),
+              children: `Size: ${currentTheme.fontSize}`,
+            }).outerHTML
+          }
+          ${
+            Badge({
+              config: new ComponentConfigBuilder('success').build(),
+              children: `Radius: ${currentTheme.borderRadius}px`,
+            }).outerHTML
+          }
         </div>
         <div style="
           margin-top: 20px; 
@@ -218,168 +248,171 @@ export const ThemeContextDemo: Story = {
             This nested component also has access to the same theme context!
           </p>
         </div>
-      `
+      `;
 
-      themedArea.appendChild(demoCard)
-    }
+      themedArea.appendChild(demoCard);
+    };
 
-    renderThemedComponents()
-    container.appendChild(themedArea)
+    renderThemedComponents();
+    container.appendChild(themedArea);
 
-    return container
+    return container;
   },
-}
+};
 
 export const UserAuthContext: Story = {
   render: () => {
     const UserCtx = createContext<UserContext>({
       username: 'Guest',
       role: 'guest',
-      isLoggedIn: false
-    })
+      isLoggedIn: false,
+    });
 
     let currentUser: UserContext = {
       username: 'Guest',
       role: 'guest',
-      isLoggedIn: false
-    }
+      isLoggedIn: false,
+    };
 
-    const container = document.createElement('div')
-    container.style.cssText = 'padding: 20px; max-width: 600px;'
+    const container = document.createElement('div');
+    container.style.cssText = 'padding: 20px; max-width: 600px;';
 
     const title = Typography({
       config: new ComponentConfigBuilder('primary').build(),
-      children: 'User Authentication Context'
-    })
-    container.appendChild(title)
+      children: 'User Authentication Context',
+    });
+    container.appendChild(title);
 
-    const desc = document.createElement('p')
-    desc.style.cssText = 'background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;'
-    desc.textContent = '🔐 Login to see how context propagates user data to all child components!'
-    container.appendChild(desc)
+    const desc = document.createElement('p');
+    desc.style.cssText = 'background: #fff3cd; padding: 15px; border-radius: 8px; margin: 15px 0;';
+    desc.textContent = '🔐 Login to see how context propagates user data to all child components!';
+    container.appendChild(desc);
 
     // Auth controls
     const authCard = Card({
       config: new ComponentConfigBuilder('primary').build(),
       styling: new ComponentStylingBuilder().build(),
-      children: ''
-    })
-    authCard.style.cssText = 'padding: 20px; margin: 20px 0;'
+      children: '',
+    });
+    authCard.style.cssText = 'padding: 20px; margin: 20px 0;';
 
-    const userContent = document.createElement('div')
+    const userContent = document.createElement('div');
 
     const renderAuthUI = () => {
       if (!currentUser.isLoggedIn) {
-        userContent.innerHTML = ''
-        
-        const heading = document.createElement('h3')
-        heading.style.cssText = 'margin: 0 0 15px 0;'
-        heading.textContent = 'Login'
-        userContent.appendChild(heading)
+        userContent.innerHTML = '';
 
-        const formContainer = document.createElement('div')
-        formContainer.style.cssText = 'display: flex; flex-direction: column; gap: 10px;'
+        const heading = document.createElement('h3');
+        heading.style.cssText = 'margin: 0 0 15px 0;';
+        heading.textContent = 'Login';
+        userContent.appendChild(heading);
+
+        const formContainer = document.createElement('div');
+        formContainer.style.cssText = 'display: flex; flex-direction: column; gap: 10px;';
 
         const usernameInput = Input({
           config: new ComponentConfigBuilder('primary').build(),
           styling: new ComponentStylingBuilder().build(),
-          placeholder: 'Username'
-        }) as HTMLInputElement
+          placeholder: 'Username',
+        }) as HTMLInputElement;
 
-        const roleSelect = document.createElement('select')
-        roleSelect.style.cssText = 'padding: 10px; border: 1px solid #ddd; border-radius: 6px;'
-        const userOption = document.createElement('option')
-        userOption.value = 'user'
-        userOption.textContent = 'User'
-        const adminOption = document.createElement('option')
-        adminOption.value = 'admin'
-        adminOption.textContent = 'Admin'
-        roleSelect.appendChild(userOption)
-        roleSelect.appendChild(adminOption)
+        const roleSelect = document.createElement('select');
+        roleSelect.style.cssText = 'padding: 10px; border: 1px solid #ddd; border-radius: 6px;';
+        const userOption = document.createElement('option');
+        userOption.value = 'user';
+        userOption.textContent = 'User';
+        const adminOption = document.createElement('option');
+        adminOption.value = 'admin';
+        adminOption.textContent = 'Admin';
+        roleSelect.appendChild(userOption);
+        roleSelect.appendChild(adminOption);
 
         const loginBtn = Button({
           config: new ComponentConfigBuilder('primary').build(),
           styling: new ComponentStylingBuilder().build(),
-          children: '🔓 Login'
-        })
+          children: '🔓 Login',
+        });
 
         loginBtn.addEventListener('click', () => {
-          const username = usernameInput.value.trim() || 'User'
-          const role = roleSelect.value as 'user' | 'admin'
-          
+          const username = usernameInput.value.trim() || 'User';
+          const role = roleSelect.value as 'user' | 'admin';
+
           currentUser = {
             username,
             role,
-            isLoggedIn: true
-          }
-          
-          renderAuthUI()
-          renderUserInfo()
-        })
+            isLoggedIn: true,
+          };
 
-        formContainer.appendChild(usernameInput)
-        formContainer.appendChild(roleSelect)
-        formContainer.appendChild(loginBtn)
-        userContent.appendChild(formContainer)
+          renderAuthUI();
+          renderUserInfo();
+        });
+
+        formContainer.appendChild(usernameInput);
+        formContainer.appendChild(roleSelect);
+        formContainer.appendChild(loginBtn);
+        userContent.appendChild(formContainer);
       } else {
-        userContent.innerHTML = ''
+        userContent.innerHTML = '';
 
-        const container = document.createElement('div')
-        container.style.cssText = 'display: flex; align-items: center; justify-content: space-between;'
+        const container = document.createElement('div');
+        container.style.cssText =
+          'display: flex; align-items: center; justify-content: space-between;';
 
-        const userInfo = document.createElement('div')
-        
-        const userHeading = document.createElement('h3')
-        userHeading.style.cssText = 'margin: 0 0 5px 0;'
-        userHeading.textContent = `👤 ${currentUser.username}`
-        
+        const userInfo = document.createElement('div');
+
+        const userHeading = document.createElement('h3');
+        userHeading.style.cssText = 'margin: 0 0 5px 0;';
+        userHeading.textContent = `👤 ${currentUser.username}`;
+
         const roleBadge = Badge({
-          config: new ComponentConfigBuilder(currentUser.role === 'admin' ? 'primary' : 'secondary').build(),
-          children: currentUser.role.toUpperCase()
-        })
+          config: new ComponentConfigBuilder(
+            currentUser.role === 'admin' ? 'primary' : 'secondary'
+          ).build(),
+          children: currentUser.role.toUpperCase(),
+        });
 
-        userInfo.appendChild(userHeading)
-        userInfo.appendChild(roleBadge)
+        userInfo.appendChild(userHeading);
+        userInfo.appendChild(roleBadge);
 
         const logoutBtn = Button({
           config: new ComponentConfigBuilder('error').build(),
           styling: new ComponentStylingBuilder().build(),
-          children: '🔒 Logout'
-        })
+          children: '🔒 Logout',
+        });
 
         logoutBtn.addEventListener('click', () => {
           currentUser = {
             username: 'Guest',
             role: 'guest',
-            isLoggedIn: false
-          }
-          renderAuthUI()
-          renderUserInfo()
-        })
+            isLoggedIn: false,
+          };
+          renderAuthUI();
+          renderUserInfo();
+        });
 
-        container.appendChild(userInfo)
-        container.appendChild(logoutBtn)
-        userContent.appendChild(container)
+        container.appendChild(userInfo);
+        container.appendChild(logoutBtn);
+        userContent.appendChild(container);
       }
-    }
+    };
 
-    renderAuthUI()
-    authCard.appendChild(userContent)
-    container.appendChild(authCard)
+    renderAuthUI();
+    authCard.appendChild(userContent);
+    container.appendChild(authCard);
 
     // User info display (simulating nested components)
-    const infoArea = document.createElement('div')
-    infoArea.style.cssText = 'margin: 20px 0;'
+    const infoArea = document.createElement('div');
+    infoArea.style.cssText = 'margin: 20px 0;';
 
     const renderUserInfo = () => {
-      infoArea.innerHTML = ''
+      infoArea.innerHTML = '';
 
       const infoCard = Card({
         config: new ComponentConfigBuilder('primary').build(),
         styling: new ComponentStylingBuilder().build(),
-        children: ''
-      })
-      infoCard.style.cssText = 'padding: 20px;'
+        children: '',
+      });
+      infoCard.style.cssText = 'padding: 20px;';
 
       if (currentUser.isLoggedIn) {
         infoCard.innerHTML = `
@@ -388,31 +421,35 @@ export const UserAuthContext: Story = {
             <p style="margin: 0 0 5px 0;"><strong>Welcome back, ${currentUser.username}!</strong></p>
             <p style="margin: 0; color: #666; font-size: 14px;">Role: ${currentUser.role}</p>
           </div>
-          ${currentUser.role === 'admin' ? `
+          ${
+            currentUser.role === 'admin'
+              ? `
             <div style="padding: 15px; background: #fef3c7; border-radius: 6px; border-left: 4px solid #f59e0b;">
               <p style="margin: 0;"><strong>🛠️ Admin Panel</strong></p>
               <p style="margin: 5px 0 0 0; font-size: 14px;">You have administrative privileges</p>
             </div>
-          ` : ''}
+          `
+              : ''
+          }
           <p style="margin-top: 15px; font-size: 14px; color: #666;">
             This component receives user data from context, no props passed!
           </p>
-        `
+        `;
       } else {
         infoCard.innerHTML = `
           <div style="text-align: center; padding: 40px 20px; color: #666;">
             <div style="font-size: 3rem; margin-bottom: 10px;">🔒</div>
             <p>Please login to view your dashboard</p>
           </div>
-        `
+        `;
       }
 
-      infoArea.appendChild(infoCard)
-    }
+      infoArea.appendChild(infoCard);
+    };
 
-    renderUserInfo()
-    container.appendChild(infoArea)
+    renderUserInfo();
+    container.appendChild(infoArea);
 
-    return container
+    return container;
   },
-}
+};
