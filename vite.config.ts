@@ -9,4 +9,9 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@pulsar-framework/pulsar.dev'],
   },
+  server: {
+    hmr: {
+      overlay: true,
+    },
+  },
 });
